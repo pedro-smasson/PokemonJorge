@@ -28,4 +28,30 @@ public class TrainerService
     {
         return _repository.findTrainerByGender(gender);
     }
+
+    public TrainerModel save(TrainerModel model)
+    {
+        return _repository.save(model);
+    }
+
+    public void delete(long id)
+    {
+        var idFound = _repository.findTrainerById(id);
+
+        if(idFound.isPresent())
+            _repository.delete(idFound.get());
+    }
+
+    public TrainerModel update(TrainerModel model)
+    {
+        var idFound = _repository.findTrainerById(model.getId());
+
+        if(idFound.isPresent())
+        {
+            idFound.get().setName(model.getName());
+            idFound.get().setGender(model.getGender());
+            return _repository.save(idFound.get());
+        }
+        return null;
+    }
 }
