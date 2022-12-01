@@ -30,4 +30,10 @@ public class PokemonModel extends RepresentationModel
     @Getter @Setter
     @ApiModelProperty(notes = "Pokemon's type")
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "trainer_id")
+    @Getter @Setter
+    @ApiModelProperty(notes = "Trainer's pokemon(s)")
+    private TrainerModel trainer;
 }
