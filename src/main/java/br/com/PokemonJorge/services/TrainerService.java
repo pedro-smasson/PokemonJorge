@@ -1,5 +1,6 @@
 package br.com.PokemonJorge.services;
 
+import br.com.PokemonJorge.models.PokemonModel;
 import br.com.PokemonJorge.models.TrainerModel;
 import br.com.PokemonJorge.repositories.TrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,13 @@ public class TrainerService
     @Autowired
     private TrainerRepository _repository;
 
-    public Optional findTrainerById(long id)
+    public Optional<TrainerModel> findTrainerById(long id)
     {
         return _repository.findTrainerById(id);
     }
 
-    public List<TrainerModel> findTrainerByName(String name)
-    {
-        return _repository.findTrainerByName(name);
-    }
-
-    public List<TrainerModel> findTrainerByGender(char gender)
-    {
-        return _repository.findTrainerByGender(gender);
+    public List<TrainerModel> findAll(){
+        return _repository.findAll();
     }
 
     public TrainerModel save(TrainerModel model)

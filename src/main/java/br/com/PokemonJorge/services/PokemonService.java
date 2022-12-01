@@ -16,38 +16,32 @@ public class PokemonService
 
     public Optional<PokemonModel> findPokemonById(long id) { return _repository.findPokemonById(id); }
 
-    public List<PokemonModel> findPokemonByName(String name)
-    {
-        return _repository.findPokemonByName(name);
-    }
-
-    public List<PokemonModel> findPokemonByType(String type)
-    {
-        return _repository.findPokemonByType(type);
-    }
-
     public List<PokemonModel> findAll(){
         return _repository.findAll();
     }
 
-    public PokemonModel save(PokemonModel model){
-        return _repository.save(model);
-    }
+    public PokemonModel save(PokemonModel model) { return _repository.save(model); }
 
-    public PokemonModel update(PokemonModel model){
+    public PokemonModel update(PokemonModel model)
+    {
         var found = _repository.findById(model.getId());
-        if(found.isPresent()){
+
+        if(found.isPresent())
+        {
             found.get().setName(model.getName());
             found.get().setType(model.getType());
+            found.get().setTrainer(model.getTrainer());
             return _repository.save(found.get());
-        } else {
-            return null;
         }
+        return null;
     }
 
-    public void delete(long id){
+    public void delete(long id)
+    {
         var found = _repository.findById(id);
-        if(found.isPresent()){
+
+        if(found.isPresent())
+        {
             _repository.delete(found.get());
         }
     }
